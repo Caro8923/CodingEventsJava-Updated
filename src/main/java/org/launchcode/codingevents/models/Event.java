@@ -1,8 +1,6 @@
 package org.launchcode.codingevents.models;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.util.Objects;
 
@@ -24,6 +22,16 @@ public class Event {
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
+
+    @NotBlank(message = "Location is required")
+    private String location;
+
+    @AssertTrue(message = "Attendee must register")
+    private Boolean registrationStatus;
+
+    @Positive(message = "Number of attendees must be over zero")
+    private int numberOfAttendees;
+
 
     public Event(String name, String description, String contactEmail) {
         this();
@@ -60,6 +68,32 @@ public class Event {
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
     }
+
+    public @NotBlank(message = "Location is required") String getLocation() {
+        return location;
+    }
+
+    public void setLocation(@NotBlank(message = "Location is required") String location) {
+        this.location = location;
+    }
+
+    public @AssertTrue(message = "Attendee must register") Boolean getRegistrationStatus() {
+        return registrationStatus;
+    }
+
+    public void setRegistrationStatus(@AssertTrue(message = "Attendee must register") Boolean registrationStatus) {
+        this.registrationStatus = registrationStatus;
+    }
+
+    @Positive(message = "Number of attendees must be over zero")
+    public int getNumberOfAttendees() {
+        return numberOfAttendees;
+    }
+
+    public void setNumberOfAttendees(@Positive(message = "Number of attendees must be over zero") int numberOfAttendees) {
+        this.numberOfAttendees = numberOfAttendees;
+    }
+
 
     public int getId() {
         return id;
